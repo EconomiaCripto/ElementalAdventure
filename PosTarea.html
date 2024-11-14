@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Área de Tareas - Telegram Bot</title>
+    <style>
+        /* Fuente y estilos generales */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #fff;
+            color: #000;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            background-image: url('fondo1.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            box-sizing: border-box;
+        }
+
+        /* Encabezado */
+        header {
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            margin-bottom: 10px;
+        }
+
+        /* Contenedor de tareas */
+        .tasks-container {
+            width: 90%;
+            max-width: 500px;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+            overflow-y: auto;
+            max-height: 60vh;
+        }
+
+        /* Tarea individual */
+        .task {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: space-between;
+            padding: 12px;
+            background-color: rgba(0, 0, 0, 0.1);
+            border: 1px solid #333;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .task:hover {
+            background-color: rgba(0, 0, 0, 0.2);
+            transform: scale(1.02);
+        }
+
+        /* Título de la tarea */
+        .task-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Descripción de la tarea */
+        .task-desc {
+            font-size: 12px;
+            color: #666;
+        }
+
+        /* Botón de enlace */
+        .task-button {
+            padding: 8px 16px;
+            font-size: 14px;
+            color: #fff;
+            background-color: #000;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .task-button:hover {
+            background-color: #444;
+        }
+
+        .task-button:active {
+            background-color: #555;
+        }
+
+        /* Botón de regreso */
+        .back-btn {
+            margin-top: 20px;
+            padding: 10px 18px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #000;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .back-btn:hover {
+            background-color: #444;
+        }
+
+        .back-btn:active {
+            background-color: #555;
+        }
+
+        /* Ajustes para pantallas pequeñas */
+        @media (max-width: 600px) {
+            header {
+                font-size: 18px;
+                padding: 10px;
+            }
+
+            .task-title {
+                font-size: 12px;
+            }
+
+            .task-desc {
+                font-size: 10px;
+            }
+
+            .task-button {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+
+            .back-btn {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        Tareas de Seguimiento
+    </header>
+
+    <div class="tasks-container">
+        <div class="task">
+            <div>
+                <div class="task-title">Seguir en Instagram</div>
+                <div class="task-desc">Sigue nuestra cuenta oficial de Instagram para recibir actualizaciones y
+                    promociones.</div>
+            </div>
+            <a href="https://www.instagram.com/tu_cuenta_oficial" target="_blank" class="task-button">Ir a Instagram</a>
+        </div>
+
+        <div class="task">
+            <div>
+                <div class="task-title">Unirte al canal de Telegram</div>
+                <div class="task-desc">Únete a nuestro canal de Telegram para recibir las últimas noticias y tareas.
+                </div>
+            </div>
+            <a href="https://t.me/tu_canal_oficial" target="_blank" class="task-button">Unirse al Canal</a>
+        </div>
+
+        <div class="task">
+            <div>
+                <div class="task-title">Seguir en Twitter</div>
+                <div class="task-desc">Síguenos en Twitter para obtener ofertas especiales y eventos.</div>
+            </div>
+            <a href="https://twitter.com/tu_cuenta_oficial" target="_blank" class="task-button">Ir a Twitter</a>
+        </div>
+
+        <div class="task">
+            <div>
+                <div class="task-title">Comentar en Facebook</div>
+                <div class="task-desc">Deja un comentario en nuestra última publicación en Facebook.</div>
+            </div>
+            <a href="https://facebook.com/tu_pagina_oficial" target="_blank" class="task-button">Comentar en
+                Facebook</a>
+        </div>
+
+        <!-- Agrega más tareas aquí -->
+
+    </div>
+
+    <button class="back-btn" onclick="goBack()">Volver al inicio</button>
+
+    <script>
+        function goBack() {
+            // Vuelve a la página principal o a otra vista
+            window.history.back();
+        }
+    </script>
+
+</body>
+
+</html>

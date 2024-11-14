@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ranking - Elemental Tap Game</title>
+    <style>
+        @font-face {
+            font-family: 'Hamster Kombat';
+            src: url('hamster-kombat.ttf') format('truetype');
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            padding: 10px;
+            box-sizing: border-box;
+            background-image: url('fondo1.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            color: white;
+            font-family: 'Hamster Kombat', sans-serif;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        header {
+            width: 90%;
+            max-width: 600px;
+            background-color: rgba(2, 2, 2, 0.8);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
+
+        #ranking-title {
+            font-size: 36px;
+            font-weight: bold;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.8);
+            color: white;
+            margin: 0;
+        }
+
+        .ranking-container {
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            padding: 20px;
+            width: 90%;
+            max-width: 600px;
+            text-align: left;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+            overflow-y: auto;
+            max-height: 500px;
+        }
+
+        .user-entry {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 10px 0;
+            padding: 12px 18px;
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.1);
+            transition: background-color 0.3s;
+        }
+
+        .user-entry:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .medal {
+            font-size: 22px;
+            margin-right: 15px;
+        }
+
+        .gold {
+            color: gold;
+        }
+
+        .silver {
+            color: silver;
+        }
+
+        .bronze {
+            color: #cd7f32;
+        }
+
+        footer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 90%;
+            max-width: 600px;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
+
+        footer div {
+            font-size: 18px;
+            color: white;
+            cursor: pointer;
+            text-align: center;
+            transition: background-color 0.3s, transform 0.2s;
+            padding: 10px 20px;
+            border-radius: 8px;
+            flex-grow: 1;
+            margin: 0 10px;
+        }
+
+        footer div:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        footer div:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1 id="ranking-title">Ranking de Usuarios</h1>
+    </header>
+
+    <div class="ranking-container" id="rankingContainer">
+        <!-- Entradas de usuarios se agregarán aquí dinámicamente -->
+    </div>
+
+    <footer>
+        <div id="back-button" onclick="goBack()">Volver</div>
+    </footer>
+
+    <script>
+        // Datos simulados de 100 usuarios y sus tokens
+        const users = [
+            { name: "Usuario1", tokens: 5000 },
+            { name: "Usuario2", tokens: 3000 },
+            { name: "Usuario3", tokens: 7000 },
+            { name: "Usuario4", tokens: 2000 },
+            { name: "Usuario5", tokens: 10000 },
+            { name: "Usuario6", tokens: 8500 },
+            { name: "Usuario7", tokens: 1200 },
+            { name: "Usuario8", tokens: 4500 },
+            { name: "Usuario9", tokens: 3100 },
+            { name: "Usuario10", tokens: 9200 },
+            { name: "Usuario11", tokens: 500 },
+            { name: "Usuario12", tokens: 6700 },
+            { name: "Usuario13", tokens: 8800 },
+            { name: "Usuario14", tokens: 7800 },
+            { name: "Usuario15", tokens: 3300 },
+            { name: "Usuario16", tokens: 5900 },
+            { name: "Usuario17", tokens: 9000 },
+            { name: "Usuario18", tokens: 1500 },
+            { name: "Usuario19", tokens: 300 },
+            { name: "Usuario20", tokens: 4700 },
+            { name: "Usuario21", tokens: 6000 },
+            { name: "Usuario22", tokens: 8300 },
+            { name: "Usuario23", tokens: 5400 },
+            { name: "Usuario24", tokens: 7200 },
+            { name: "Usuario25", tokens: 850 },
+            { name: "Usuario26", tokens: 4600 },
+            { name: "Usuario27", tokens: 9200 },
+            { name: "Usuario28", tokens: 2300 },
+            { name: "Usuario29", tokens: 3900 },
+            { name: "Usuario30", tokens: 7800 },
+            { name: "Usuario31", tokens: 2400 },
+            { name: "Usuario32", tokens: 8200 },
+            { name: "Usuario33", tokens: 4300 },
+            { name: "Usuario34", tokens: 12000 },
+            { name: "Usuario35", tokens: 3700 },
+            { name: "Usuario36", tokens: 8900 },
+            { name: "Usuario37", tokens: 4700 },
+            { name: "Usuario38", tokens: 15000 },
+            { name: "Usuario39", tokens: 1100 },
+            { name: "Usuario40", tokens: 6800 },
+            { name: "Usuario41", tokens: 9100 },
+            { name: "Usuario42", tokens: 5400 },
+            { name: "Usuario43", tokens: 7500 },
+            { name: "Usuario44", tokens: 4600 },
+            { name: "Usuario45", tokens: 9900 },
+            { name: "Usuario46", tokens: 8200 },
+            { name: "Usuario47", tokens: 3200 },
+            { name: "Usuario48", tokens: 4000 },
+            { name: "Usuario49", tokens: 3700 },
+            { name: "Usuario50", tokens: 5400 },
+            { name: "Usuario51", tokens: 9500 },
+            { name: "Usuario52", tokens: 7200 },
+            { name: "Usuario53", tokens: 6100 },
+            { name: "Usuario54", tokens: 8300 },
+            { name: "Usuario55", tokens: 7400 },
+            { name: "Usuario56", tokens: 2000 },
+            { name: "Usuario57", tokens: 8200 },
+            { name: "Usuario58", tokens: 9400 },
+            { name: "Usuario59", tokens: 3600 },
+            { name: "Usuario60", tokens: 4000 },
+            { name: "Usuario61", tokens: 5400 },
+            { name: "Usuario62", tokens: 1300 },
+            { name: "Usuario63", tokens: 9000 },
+            { name: "Usuario64", tokens: 500 },
+            { name: "Usuario65", tokens: 4700 },
+            { name: "Usuario66", tokens: 8600 },
+            { name: "Usuario67", tokens: 3700 },
+            { name: "Usuario68", tokens: 8200 },
+            { name: "Usuario69", tokens: 3900 },
+            { name: "Usuario70", tokens: 5600 },
+            { name: "Usuario71", tokens: 7600 },
+            { name: "Usuario72", tokens: 4800 },
+            { name: "Usuario73", tokens: 5500 },
+            { name: "Usuario74", tokens: 7300 },
+            { name: "Usuario75", tokens: 3000 },
+            { name: "Usuario76", tokens: 6400 },
+            { name: "Usuario77", tokens: 2800 },
+            { name: "Usuario78", tokens: 10000 },
+            { name: "Usuario79", tokens: 8200 },
+            { name: "Usuario80", tokens: 7000 },
+            { name: "Usuario81", tokens: 4600 },
+            { name: "Usuario82", tokens: 9500 },
+            { name: "Usuario83", tokens: 6900 },
+            { name: "Usuario84", tokens: 5800 },
+            { name: "Usuario85", tokens: 6600 },
+            { name: "Usuario86", tokens: 5100 },
+            { name: "Usuario87", tokens: 700 },
+            { name: "Usuario88", tokens: 9300 },
+            { name: "Usuario89", tokens: 5300 },
+            { name: "Usuario90", tokens: 7000 },
+            { name: "Usuario91", tokens: 5500 },
+            { name: "Usuario92", tokens: 4600 },
+            { name: "Usuario93", tokens: 10000 },
+            { name: "Usuario94", tokens: 7100 },
+            { name: "Usuario95", tokens: 1500 },
+            { name: "Usuario96", tokens: 5800 },
+            { name: "Usuario97", tokens: 600 },
+            { name: "Usuario98", tokens: 7500 },
+            { name: "Usuario99", tokens: 800 },
+            { name: "Usuario100", tokens: 9500 }
+        ];
+
+        // Ordenar usuarios por tokens en orden descendente
+        users.sort((a, b) => b.tokens - a.tokens);
+
+        // Mostrar los primeros 10 usuarios en el ranking
+        const rankingContainer = document.getElementById('rankingContainer');
+        users.slice(0, 10).forEach((user, index) => {
+            const userEntry = document.createElement('div');
+            userEntry.classList.add('user-entry');
+
+            const medal = document.createElement('span');
+            medal.classList.add('medal');
+            if (index === 0) {
+                medal.classList.add('gold');
+                medal.textContent = '🥇';
+            } else if (index === 1) {
+                medal.classList.add('silver');
+                medal.textContent = '🥈';
+            } else if (index === 2) {
+                medal.classList.add('bronze');
+                medal.textContent = '🥉';
+            } else {
+                medal.textContent = `${index + 1}`;
+            }
+
+            const userName = document.createElement('span');
+            userName.textContent = user.name;
+
+            const userTokens = document.createElement('span');
+            userTokens.textContent = `${user.tokens} tokens`;
+
+            userEntry.appendChild(medal);
+            userEntry.appendChild(userName);
+            userEntry.appendChild(userTokens);
+            rankingContainer.appendChild(userEntry);
+        });
+
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+
+</html>

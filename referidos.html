@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Área de Referidos</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('fondo1.png');
+            background-size: cover;
+            background-position: center;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        header {
+            background-color: rgba(2, 2, 2, 0.85);
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 10;
+            font-size: 1.3em;
+            font-weight: 700;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        .container {
+            background-color: rgba(10, 10, 10, 0.9);
+            border-radius: 8px;
+            padding: 15px;
+            max-width: 380px;
+            width: 100%;
+            margin-top: 70px;
+            box-shadow: 0 4px 8px rgb(255, 255, 255);
+            position: relative;
+        }
+
+        .content h2 {
+            font-size: 1.2em;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .content p {
+            font-size: 1em;
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        .referral-link-box {
+            background-color: #070707;
+            padding: 8px;
+            border-radius: 8px;
+            display: inline-block;
+            width: 100%;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
+        }
+
+        .referral-link-box h3 {
+            font-size: 1.1em;
+            color: #ffffff;
+            margin-bottom: 5px;
+        }
+
+        .referral-link-box p {
+            font-size: 1em;
+            color: #ffffff;
+        }
+
+        .referral-link {
+            font-size: 1em;
+            color: #080808;
+            word-wrap: break-word;
+            font-weight: 500;
+        }
+
+        .referral-button {
+            background-color: #ffffff;
+            color: rgb(2, 2, 2);
+            border: none;
+            padding: 10px 20px;
+            font-size: 0.9em;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 15px;
+            width: 100%;
+            max-width: 200px;
+            margin-bottom: 8px;
+        }
+
+        .referral-button:hover {
+            background-color: rgba(255, 252, 252);
+        }
+
+        .footer {
+            background-color: rgba(0, 0, 0, 0.85);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .footer p {
+            margin: 0;
+            font-size: 0.8em;
+        }
+
+        /* Estilos responsivos */
+        @media (max-width: 600px) {
+            .container {
+                margin-top: 60px;
+            }
+
+            header h1 {
+                font-size: 1.2em;
+            }
+
+            .content h2 {
+                font-size: 1.1em;
+            }
+
+            .referral-button {
+                width: 100%;
+                padding: 12px 0;
+                font-size: 0.9em;
+                margin-top: 10px;
+            }
+
+            .footer p {
+                font-size: 0.75em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>¡Invita y Gana Tokens!</h1>
+    </header>
+
+    <div class="container">
+        <div class="content">
+            <h2>¿Cómo funciona el programa de referidos?</h2>
+            <p>Comparte tu enlace único de referido con tus amigos y gana 500 tokens por cada usuario que se registre y
+                comience a jugar. ¡Cuantos más refieras, más tokens ganarás!</p>
+
+            <div class="referral-link-box">
+                <h3>Tu Enlace de Referido</h3>
+                <p>Comparte este enlace con tus amigos y gana 500 tokens por cada referido:</p>
+                <p class="referral-link" id="referralLink">https://t.me/your_bot_username?start=USER_ID</p>
+            </div>
+
+            <button class="referral-button" onclick="copyReferralLink()">Copiar Enlace</button>
+            <button class="referral-button" onclick="goBackToHome()">Volver al Inicio</button>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Powered by <strong>Tu Plataforma</strong></p>
+    </div>
+
+    <script>
+        // Función para copiar el enlace al portapapeles
+        function copyReferralLink() {
+            const referralLink = document.getElementById('referralLink');
+            const range = document.createRange();
+            range.selectNode(referralLink);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+            document.execCommand('copy');
+            window.getSelection().removeAllRanges();
+
+            alert("Enlace copiado al portapapeles: " + referralLink.textContent);
+        }
+
+        // Función para volver al inicio
+        function goBackToHome() {
+            window.location.href = 'index.html'; // Cambia 'index.html' por la URL de tu página de inicio
+        }
+    </script>
+
+</body>
+
+</html>
